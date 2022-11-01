@@ -88,9 +88,9 @@
    });
   };
 
-  export const getTrendingMovies = (id) => {
+  export const getTrendingMovies = (time) => {
     return fetch(
-      `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `https://api.themoviedb.org/3/trending/movie/${time}?api_key=${process.env.REACT_APP_TMDB_KEY}`
     ).then( (response) => {
       if (!response.ok) {
         throw new Error(response.json().message);

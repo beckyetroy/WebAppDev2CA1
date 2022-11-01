@@ -12,7 +12,8 @@ import Select from "@mui/material/Select";
 import img from '../../images/pexels-dziana-hasanbekava-5480827.jpg'
 import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
-import Spinner from '../spinner'
+import Spinner from '../spinner';
+import { useNavigate } from "react-router-dom";
 
 const formControl = 
   {
@@ -21,7 +22,8 @@ const formControl =
     backgroundColor: "rgb(255, 255, 255)"
   };
 
-export default function FilterMoviesCard(props) {
+export default function FilterTrendingCard(props) {
+  const navigate = useNavigate();
 
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
 
@@ -50,6 +52,15 @@ export default function FilterMoviesCard(props) {
     handleChange(e, "genre", e.target.value);
   };
 
+  const times = ["This Week", "Today"];
+
+  const handleTimeChange = (e) => {
+    handleChange(e, "time", e.target.value);
+    if (e.target.value === "Today") navigate('/movies/trending/today');
+    else navigate('/movies/trending/week');
+  };
+
+
   return (
     <Card 
       sx={{
@@ -71,6 +82,24 @@ export default function FilterMoviesCard(props) {
           value={props.titleFilter}
           onChange={handleTextChange}
         />
+        <FormControl sx={{...formControl}}>
+          <InputLabel id="time-label">Trending</InputLabel>
+          <Select
+            labelId="time-label"
+            id="time-select"
+            defaultValue=""
+            value={props.timeFilter}
+            onChange={handleTimeChange}
+          >
+            {times.map((time) => {
+              return (
+                <MenuItem key={time} value={time}>
+                  {time}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
         <FormControl sx={{...formControl}}>
           <InputLabel id="genre-label">Genre</InputLabel>
           <Select

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
+import FilterTrendingCard from "../filterTrendingMoviesCard.js";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
 
 function MovieListPageTemplate({ movies, title, action }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
+  const [timeFilter] = useState(() => 
+      (title.includes("Today") ? "Today" : "This Week"));
+
   const genreId = Number(genreFilter);
 
   let displayedMovies = movies
@@ -19,7 +23,7 @@ function MovieListPageTemplate({ movies, title, action }) {
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
-    else setGenreFilter(value);
+    else if (type === "genre") setGenreFilter(value);
   };
 
   return (
@@ -29,11 +33,20 @@ function MovieListPageTemplate({ movies, title, action }) {
       </Grid>
       <Grid item container spacing={5}>
         <Grid key="find" item xs={12} sm={6} md={4} lg={3} xl={2}>
+        {title.includes("Trending") ? (
+          <FilterTrendingCard
+            onUserInput={handleChange}
+            titleFilter={nameFilter}
+            genreFilter={genreFilter}
+            timeFilter={timeFilter}
+          />
+        ) :
           <FilterCard
             onUserInput={handleChange}
             titleFilter={nameFilter}
             genreFilter={genreFilter}
           />
+        }
         </Grid>
         <MovieList action={action} movies={displayedMovies}></MovieList>
       </Grid>
