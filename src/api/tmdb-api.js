@@ -102,3 +102,17 @@
       throw error
    });
   };
+
+  export const getMovieCredits = (args) => {
+    const [, idPart] = args.queryKey;
+    const { id } = idPart;
+    console.log('https://api.themoviedb.org/3/movie/' +id + '/credits?api_key=' + process.env.REACT_APP_TMDB_KEY);
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    )
+    .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        return json;
+      });
+  };
