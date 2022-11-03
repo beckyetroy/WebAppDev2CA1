@@ -23,10 +23,15 @@ export default function FilterCastCard(props) {
     handleChange(e, "name", e.target.value);
   };
 
+  const handleSecondTextChange = (e, props) => {
+    handleChange(e, "character", e.target.value);
+  };
+
   return (
     <Card 
       sx={{
         maxWidth: 200,
+        minWidth: 175,
         backgroundColor: "rgb(51, 153, 255)"
       }} 
       variant="outlined">
@@ -41,8 +46,17 @@ export default function FilterCastCard(props) {
           label="By Actor"
           type="search"
           variant="filled"
-          value={props.titleFilter}
+          value={props.actorFilter}
           onChange={handleTextChange}
+        />
+        <TextField
+          sx={{...formControl}}
+          id="filled-search"
+          label="By Character"
+          type="search"
+          variant="filled"
+          value={props.characterFilter}
+          onChange={handleSecondTextChange}
         />
       </CardContent>
     </Card>
