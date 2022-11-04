@@ -1,11 +1,11 @@
 import React from "react";
 import { getMovieCredits } from "../api/tmdb-api";
-import PageTemplate from '../components/templateCastListPage';
+import PageTemplate from '../components/templateCrewListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import { useParams } from 'react-router-dom';
 
-const CastListPage = (props) => {
+const CrewListPage = (props) => {
   const { id } = useParams();
   const {  data, error, isLoading, isError }  = useQuery(
     ["credits", { id: id }],
@@ -18,15 +18,27 @@ const CastListPage = (props) => {
 
   if (isError) {
     return <h1>{error.message}</h1>
-  }
+  }  
 
-  const casts = data.cast;
+  var seen = {};
+  const crews = data.crew.filter(function(entry) {
+    var previous;
+
+    if (seen.hasOwnProperty(entry.id)) {
+        previous = seen[entry.id];
+        previous.job = previous.job + ', ' + entry.job;
+        return false;
+    }
+
+    seen[entry.id] = entry;
+    return true;
+});;
 
   return (
     <PageTemplate
-      title='Cast'
-      casts={casts}
+      title='Crew'
+      crews={crews}
     />
   );
 };
-export default CastListPage;
+export default CrewListPage;

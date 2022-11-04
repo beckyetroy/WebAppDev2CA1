@@ -23,7 +23,7 @@ const root = {
 };
 const chip = { margin: 0.5 };
 
-const MovieDetails = ({ movie, action }) => {  // Don't miss this!
+const MovieDetails = ({ movie }) => {  // Don't miss this!
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
@@ -78,10 +78,15 @@ const MovieDetails = ({ movie, action }) => {  // Don't miss this!
         component="ul" 
         sx={{...root}}
       >
-        <CardActions disableSpacing style={{justifyContent:"center"}}>
+      <CardActions style={{justifyContent:"center"}}>
         <li>
           <Link to={`/movies/${movie.id}/cast`} style={{textDecoration:'none'}}>
           <Button variant="contained" size="medium" style={{backgroundColor:'#cc66ff'}}> View Cast</Button>
+          </Link>
+        </li>
+        <li>
+          <Link to={`/movies/${movie.id}/crew`} style={{textDecoration:'none'}}>
+          <Button variant="contained" size="medium" style={{backgroundColor:'#cc66ff'}}> View Crew</Button>
           </Link>
         </li>
       </CardActions>
