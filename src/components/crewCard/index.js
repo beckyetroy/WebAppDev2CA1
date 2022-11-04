@@ -26,7 +26,7 @@ export default function CrewCard({ crew }) {
         title={
             <CardActions disableSpacing style={{justifyContent:"center"}}>
             <Typography variant="h7" component="p" align="center" style={{justifyContent:"center"}}>
-              <Link to={`/crew/${crew.credit_id}`} style={{ textDecoration: 'none', fontSize: '0.75em', justifyContent:"center", color:'#ac00e6'}}>
+              <Link to={`/person/${crew.id}`} style={{ textDecoration: 'none', fontSize: '0.75em', justifyContent:"center", color:'#ac00e6'}}>
                 {crew.name}{" "}
               </Link>
             </Typography>
