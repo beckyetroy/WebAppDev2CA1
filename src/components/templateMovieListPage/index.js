@@ -8,6 +8,8 @@ import Grid from "@mui/material/Grid";
 function MovieListPageTemplate({ movies, title, action }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
+  const [sortFilter, setSortFilter] = useState("Popularity");
+  const [sortType, setSortType] = useState("popularity");
   const [timeFilter] = useState(() => 
       (title.includes("Today") ? "Today" : "This Week"));
 
@@ -19,11 +21,19 @@ function MovieListPageTemplate({ movies, title, action }) {
     })
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;
-    });
+    })
+    .sort((m1, m2) => (
+      (m1[sortType] < m2[sortType]) ? 1 : (m1[sortType] > m2[sortType]) ? -1 : 0
+    ));
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
     else if (type === "genre") setGenreFilter(value);
+    else if (type === "sort") {
+      setSortFilter(value);
+      if (value ==="Popularity") setSortType("popularity");
+      else if (value === "Rating") setSortType("vote_average");
+    }
   };
 
   return (
@@ -39,12 +49,14 @@ function MovieListPageTemplate({ movies, title, action }) {
             titleFilter={nameFilter}
             genreFilter={genreFilter}
             timeFilter={timeFilter}
+            sortFilter={sortFilter}
           />
         ) :
           <FilterCard
             onUserInput={handleChange}
             titleFilter={nameFilter}
             genreFilter={genreFilter}
+            sortFilter={sortFilter}
           />
         }
         </Grid>
