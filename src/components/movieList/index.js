@@ -17,15 +17,11 @@ const PaginatedMovies = ({ movies, moviesPerPage, action })  => {
   const [movieOffset, setMovieOffset] = useState(0);
 
   const endOffset = movieOffset + moviesPerPage;
-  console.log(`Loading movies from ${movieOffset} to ${endOffset}`);
   const currentMovies = movies.slice(movieOffset, endOffset);
   const pageCount = Math.ceil(movies.length / moviesPerPage);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * moviesPerPage) % movies.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
     setMovieOffset(newOffset);
   };
 

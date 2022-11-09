@@ -19,7 +19,11 @@
     margin-right: 0.5em;
     color: #bf00ff;
     font-weight: 500;
-  }
+}
+
+.pagination > li > a {
+    cursor: pointer;
+}
 
 .pagination > li.pagination__link--disabled {
     display: inline-block;

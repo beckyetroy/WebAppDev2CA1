@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Crew from "../crewCard";
 import Grid from "@mui/material/Grid";
+import ReactPaginate from 'react-paginate';
+import '../movieList/index.css';
 
 const CrewList = ( {crews, action }) => {
   let crewCards = crews.map((c) => (
@@ -11,4 +13,37 @@ const CrewList = ( {crews, action }) => {
   return crewCards;
 };
 
-export default CrewList;
+const PaginatedCrew = ({ crews, crewsPerPage, action })  => {
+  const [crewOffset, setCrewOffset] = useState(0);
+
+  const endOffset = crewOffset + crewsPerPage;
+  const currentCrew = crews.slice(crewOffset, endOffset);
+  const pageCount = Math.ceil(crews.length / crewsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * crewsPerPage) % crews.length;
+    setCrewOffset(newOffset);
+  };
+
+  return (
+    <>
+      <CrewList crews={currentCrew} action={action} />
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="Next →"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="← Previous"
+        renderOnZeroPageCount={null}
+        containerClassName={"pagination"}
+        previousLinkClassName={"pagination__link"}
+        nextLinkClassName={"pagination__link"}
+        disabledClassName={"pagination__link--disabled"}
+        activeClassName={"pagination__link--active"}
+      />
+    </>
+  );
+}
+
+export default PaginatedCrew;

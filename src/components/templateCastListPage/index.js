@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "../headerMovieList";
 import FilterCard from "../filterCastCard";
-import CastList from "../castList";
+import PaginatedCast from "../castList";
 import Grid from "@mui/material/Grid";
 
 function CastListPageTemplate({ casts, title, action }) {
@@ -48,7 +48,7 @@ function CastListPageTemplate({ casts, title, action }) {
             sortFilter={sortFilter}
           />
         </Grid>
-        <CastList action={action} casts={displayedCasts}></CastList>
+        <PaginatedCast action={action} casts={displayedCasts} castsPerPage={11}></PaginatedCast>
       </Grid>
     </Grid>
   );
