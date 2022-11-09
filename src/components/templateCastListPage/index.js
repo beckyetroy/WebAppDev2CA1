@@ -7,6 +7,8 @@ import Grid from "@mui/material/Grid";
 function CastListPageTemplate({ casts, title, action }) {
   const [nameFilter, setNameFilter] = useState("");
   const [characterFilter, setCharacterFilter] = useState("");
+  const [sortFilter, setSortFilter] = useState("Relevance");
+  const [sortType, setSortType] = useState("order");
 
   let displayedCasts = casts
     .filter((c) => {
@@ -14,11 +16,22 @@ function CastListPageTemplate({ casts, title, action }) {
     })
     .filter((c) => {
       return c.character.toLowerCase().search(characterFilter.toLowerCase()) !== -1;
-    });
+    })
+    .sort((c1, c2) => (
+      (c1[sortType] > c2[sortType]) ? 1 : (c1[sortType] < c2[sortType]) ? -1 : 0
+    ));
+
+  if (sortType === "popularity") displayedCasts = displayedCasts.reverse();
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
     else if (type === "character") setCharacterFilter(value);
+    else if (type === "sort") {
+      setSortFilter(value);
+      if (value ==="Popularity") setSortType("popularity");
+      else if (value === "Relevance") setSortType("order");
+      else if (value === "Alphabetical") setSortType("name");
+    }
   };
 
   return (
@@ -32,6 +45,7 @@ function CastListPageTemplate({ casts, title, action }) {
             onUserInput={handleChange}
             actorFilter={nameFilter}
             characterFilter={characterFilter}
+            sortFilter={sortFilter}
           />
         </Grid>
         <CastList action={action} casts={displayedCasts}></CastList>

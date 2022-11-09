@@ -4,6 +4,10 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
 
 const formControl = 
   {
@@ -25,6 +29,12 @@ export default function FilterCastCard(props) {
 
   const handleSecondTextChange = (e, props) => {
     handleChange(e, "character", e.target.value);
+  };
+
+  const sorts = ["Alphabetical", "Popularity", "Relevance"];
+
+  const handleSortChange = (e, props) => {
+    handleChange(e, "sort", e.target.value);
   };
 
   return (
@@ -58,6 +68,24 @@ export default function FilterCastCard(props) {
           value={props.characterFilter}
           onChange={handleSecondTextChange}
         />
+        <FormControl sx={{...formControl}}>
+          <InputLabel id="sort-label">Sort By</InputLabel>
+          <Select
+            labelId="sort-label"
+            id="sort-select"
+            defaultValue=""
+            value={props.sortFilter}
+            onChange={handleSortChange}
+          >
+            {sorts.map((sort) => {
+              return (
+                <MenuItem key={sort} value={sort}>
+                  {sort}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
       </CardContent>
     </Card>
   );

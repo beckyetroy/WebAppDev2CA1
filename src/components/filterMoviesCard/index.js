@@ -50,7 +50,7 @@ export default function FilterMoviesCard(props) {
     handleChange(e, "genre", e.target.value);
   };
 
-  const sorts = ["Popularity", "Rating"];
+  const sorts = ["Alphabetical", "Popularity", "Rating", "Release Date"];
 
   const handleSortChange = (e, props) => {
     handleChange(e, "sort", e.target.value);

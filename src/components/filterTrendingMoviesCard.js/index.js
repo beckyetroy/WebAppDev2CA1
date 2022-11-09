@@ -53,6 +53,7 @@ export default function FilterTrendingCard(props) {
   };
 
   const times = ["This Week", "Today"];
+  const sorts = ["Alphabetical", "Popularity", "Rating", "Release Date"];
 
   const handleTimeChange = (e) => {
     handleChange(e, "time", e.target.value);
@@ -60,6 +61,9 @@ export default function FilterTrendingCard(props) {
     else navigate('/movies/trending/week');
   };
 
+  const handleSortChange = (e, props) => {
+    handleChange(e, "sort", e.target.value);
+  };
 
   return (
     <Card 
@@ -113,6 +117,24 @@ export default function FilterTrendingCard(props) {
               return (
                 <MenuItem key={genre.id} value={genre.id}>
                   {genre.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+        <FormControl sx={{...formControl}}>
+          <InputLabel id="sort-label">Sort By</InputLabel>
+          <Select
+            labelId="sort-label"
+            id="sort-select"
+            defaultValue=""
+            value={props.sortFilter}
+            onChange={handleSortChange}
+          >
+            {sorts.map((sort) => {
+              return (
+                <MenuItem key={sort} value={sort}>
+                  {sort}
                 </MenuItem>
               );
             })}

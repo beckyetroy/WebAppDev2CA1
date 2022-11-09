@@ -18,8 +18,8 @@ export default function CastCard({ cast }) {
         image={
           cast.profile_path
             ? `https://image.tmdb.org/t/p/w500/${cast.profile_path}`
-            : cast.gender === 2 ? maleImg 
-            : femaleImg
+            : cast.gender === 1 ? femaleImg 
+            : maleImg
         }
       />
       <CardHeader sx={{minHeight: 20}} style={{justifyContent:"center", padding:0}} align="center"

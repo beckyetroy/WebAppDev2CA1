@@ -7,6 +7,8 @@ import Grid from "@mui/material/Grid";
 function CrewListPageTemplate({ crews, title, action }) {
   const [nameFilter, setNameFilter] = useState("");
   const [jobFilter, setJobFilter] = useState("");
+  const [sortFilter, setSortFilter] = useState("Default");
+  const [sortType, setSortType] = useState("");
 
   let displayedCrews = crews
     .filter((c) => {
@@ -14,11 +16,22 @@ function CrewListPageTemplate({ crews, title, action }) {
     })
     .filter((c) => {
       return c.job.toLowerCase().search(jobFilter.toLowerCase()) !== -1;
-    });
+    })
+    .sort((c1, c2) => (
+      (c1[sortType] > c2[sortType]) ? 1 : (c1[sortType] < c2[sortType]) ? -1 : 0
+    ));
+
+  if (sortType === "popularity") displayedCrews = displayedCrews.reverse();
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
     else if (type === "job") setJobFilter(value);
+    else if (type === "sort") {
+      setSortFilter(value);
+      if (value ==="Popularity") setSortType("popularity");
+      else if (value === "Alphabetical") setSortType("name");
+      else if (value === "Default") setSortType("");
+    }
   };
 
   return (
@@ -32,6 +45,7 @@ function CrewListPageTemplate({ crews, title, action }) {
             onUserInput={handleChange}
             crewFilter={nameFilter}
             jobFilter={jobFilter}
+            sortFilter={sortFilter}
           />
         </Grid>
         <CrewList action={action} crews={displayedCrews}></CrewList>

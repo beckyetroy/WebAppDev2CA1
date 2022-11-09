@@ -26,6 +26,8 @@ function MovieListPageTemplate({ movies, title, action }) {
       (m1[sortType] < m2[sortType]) ? 1 : (m1[sortType] > m2[sortType]) ? -1 : 0
     ));
 
+  if (sortType === "title") displayedMovies = displayedMovies.reverse();
+
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
     else if (type === "genre") setGenreFilter(value);
@@ -33,6 +35,8 @@ function MovieListPageTemplate({ movies, title, action }) {
       setSortFilter(value);
       if (value ==="Popularity") setSortType("popularity");
       else if (value === "Rating") setSortType("vote_average");
+      else if (value === "Alphabetical") setSortType("title");
+      else if (value === "Release Date") setSortType("release_date");
     }
   };
 

@@ -18,8 +18,8 @@ export default function CrewCard({ crew }) {
         image={
           crew.profile_path
             ? `https://image.tmdb.org/t/p/w500/${crew.profile_path}`
-            : crew.gender === 2 ? maleImg 
-            : femaleImg
+            : crew.gender === 1 ? femaleImg 
+            : maleImg
         }
       />
       <CardHeader sx={{minHeight: 20}} style={{justifyContent:"center", padding:0}} align="center"
