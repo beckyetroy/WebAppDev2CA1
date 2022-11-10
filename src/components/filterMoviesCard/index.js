@@ -12,7 +12,8 @@ import Select from "@mui/material/Select";
 import img from '../../images/pexels-dziana-hasanbekava-5480827.jpg'
 import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
-import Spinner from '../spinner'
+import Spinner from '../spinner';
+import Autocomplete from '@mui/material/Autocomplete';
 
 const formControl = 
   {
@@ -33,9 +34,6 @@ export default function FilterMoviesCard(props) {
     return <h1>{error.message}</h1>;
   }
   const genres = data.genres;
-  if (genres[0].name !== "All"){
-    genres.unshift({ id: "0", name: "All" });
-  }
 
   const handleChange = (e, type, value) => {
     e.preventDefault();
@@ -46,8 +44,9 @@ export default function FilterMoviesCard(props) {
     handleChange(e, "name", e.target.value);
   };
 
-  const handleGenreChange = (e) => {
-    handleChange(e, "genre", e.target.value);
+  const handleGenreChange = (e, value) => {
+    const genres = value.map(genre => genre.id);
+    handleChange(e, "genre", genres);
   };
 
   const sorts = ["Alphabetical", "Popularity", "Rating", "Release Date"];
@@ -78,22 +77,20 @@ export default function FilterMoviesCard(props) {
           onChange={handleTextChange}
         />
         <FormControl sx={{...formControl}}>
-          <InputLabel id="genre-label">Genre</InputLabel>
-          <Select
-            labelId="genre-label"
+          <Autocomplete
+            multiple
             id="genre-select"
-            defaultValue=""
-            value={props.genreFilter}
+            options={genres}
+            getOptionLabel={(genre) => String(genre.name)}
+            filterSelectedOptions
             onChange={handleGenreChange}
-          >
-            {genres.map((genre) => {
-              return (
-                <MenuItem key={genre.id} value={genre.id}>
-                  {genre.name}
-                </MenuItem>
-              );
-            })}
-          </Select>
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Genres"
+              />
+            )}
+          />
         </FormControl>
         <FormControl sx={{...formControl}}>
           <InputLabel id="sort-label">Sort By</InputLabel>

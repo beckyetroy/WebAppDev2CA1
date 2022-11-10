@@ -7,20 +7,18 @@ import Grid from "@mui/material/Grid";
 
 function MovieListPageTemplate({ movies, title, action }) {
   const [nameFilter, setNameFilter] = useState("");
-  const [genreFilter, setGenreFilter] = useState("0");
+  const [genreFilter, setGenreFilter] = useState([]);
   const [sortFilter, setSortFilter] = useState("Popularity");
   const [sortType, setSortType] = useState("popularity");
   const [timeFilter] = useState(() => 
       (title.includes("Today") ? "Today" : "This Week"));
-
-  const genreId = Number(genreFilter);
 
   let displayedMovies = movies
     .filter((m) => {
       return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
     })
     .filter((m) => {
-      return genreId > 0 ? m.genre_ids.includes(genreId) : true;
+      return genreFilter.length > 0 ? m.genre_ids.some(id => genreFilter.includes(id)) : true;
     })
     .sort((m1, m2) => (
       (m1[sortType] < m2[sortType]) ? 1 : (m1[sortType] > m2[sortType]) ? -1 : 0
@@ -30,7 +28,9 @@ function MovieListPageTemplate({ movies, title, action }) {
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
-    else if (type === "genre") setGenreFilter(value);
+    else if (type === "genre") {
+      setGenreFilter(value);
+    }
     else if (type === "sort") {
       setSortFilter(value);
       if (value ==="Popularity") setSortType("popularity");
