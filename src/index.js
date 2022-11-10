@@ -7,6 +7,7 @@ import PersonPage from "./pages/personDetailsPage";
 import FavoriteMoviesPage from "./pages/favoriteMoviesPage";
 import MustWatchMoviesPage from "./pages/mustWatchMoviesPage";
 import MovieReviewPage from "./pages/movieReviewPage";
+import GenerateSession from "./pages/homePage";
 import SiteHeader from './components/siteHeader'
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import CastListPage from "./pages/castListPage";
@@ -44,7 +45,7 @@ const App = () => {
           <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
           <Route path="/movies/trending/week" element={<TrendingMoviesPageWeek />} />
           <Route path="/movies/trending/today" element={<TrendingMoviesPageDay />} />
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<GenerateSession/>} />
           <Route path="*" element={ <Navigate to="/" /> } />
           <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
         </Routes>

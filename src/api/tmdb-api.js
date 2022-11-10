@@ -126,3 +126,13 @@
         return json;
       });
   };
+
+  export const generateRequestToken = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        return json;
+      });
+  };
