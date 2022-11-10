@@ -35,12 +35,12 @@ function CrewListPageTemplate({ crews, title, action }) {
   };
 
   return (
-    <Grid container sx={{ padding: '20px' }}>
+    <Grid container sx={{ padding: '1%', marginTop: -5 }}>
       <Grid item xs={12}>
         <Header title={title} />
       </Grid>
       <Grid item container spacing={1}>
-        <Grid key="find" item xs={10} sm={5} md={3} lg={2} xl={1.5}>
+        <Grid key="find" item xs={12} sm={5} md={3} lg={2} xl={1.5}>
           <FilterCard
             onUserInput={handleChange}
             crewFilter={nameFilter}

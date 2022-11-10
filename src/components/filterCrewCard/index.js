@@ -12,7 +12,8 @@ import MenuItem from "@mui/material/MenuItem";
 const formControl = 
   {
     margin: 1,
-    minWidth: 150,
+    maxWidth: '100%',
+    minWidth: '91%',
     backgroundColor: "rgb(255, 255, 255)"
   };
 
@@ -40,8 +41,7 @@ export default function FilterCrewCard(props) {
   return (
     <Card 
       sx={{
-        maxWidth: 200,
-        minWidth: 175,
+        maxWidth: '100%',
         backgroundColor: "rgb(255, 153, 102)"
       }} 
       variant="outlined">

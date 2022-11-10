@@ -14,18 +14,19 @@ const PersonHeader = (props) => {
     <Paper 
         component="div" 
         sx={{
-            display: "flex",
-            justifyContent: "space-around",
-            flexWrap: "wrap",
-            padding: 1.5,
-            margin: 0,
+          display: "flex",
+          justifyContent: "space-evenly",
+          flexWrap: "wrap",
+          padding: '1%',
+          margin: -5,
+          textAlign: 'center',
         }}
       >
       <IconButton aria-label="go back" onClick={() => navigate(-1)} >
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
 
-      <Typography variant="h3" component="h3">
+      <Typography variant="h3" component="h3" sx={{fontSize:'2.4em'}}>
         {person.name}
       </Typography>
 

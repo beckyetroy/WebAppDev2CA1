@@ -18,7 +18,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 const formControl = 
   {
     margin: 1,
-    minWidth: 220,
+    minWidth: '91%',
     backgroundColor: "rgb(255, 255, 255)"
   };
 
@@ -58,7 +58,7 @@ export default function FilterMoviesCard(props) {
   return (
     <Card 
       sx={{
-        maxWidth: 345,
+        maxWidth: '100%',
         backgroundColor: "rgb(204, 204, 0)"
       }} 
       variant="outlined">
@@ -111,11 +111,14 @@ export default function FilterMoviesCard(props) {
           </Select>
         </FormControl>
       </CardContent>
-      <CardMedia
-        sx={{ height: 300 }}
-        image={img}
-        title="Filter"
-      />
+      {window.screen.availWidth > 600 ? (
+        <CardMedia
+          sx={{ height: 300 }}
+          image={img}
+          title="Filter"
+        />
+      ): (null) }
+      {window.screen.availWidth > 600 ? (
       <CardContent>
         <Typography variant="h5" component="h1">
           <SearchIcon fontSize="large" />
@@ -123,6 +126,7 @@ export default function FilterMoviesCard(props) {
           <br />
         </Typography>
       </CardContent>
+      ): (null) }
     </Card>
   );
 }

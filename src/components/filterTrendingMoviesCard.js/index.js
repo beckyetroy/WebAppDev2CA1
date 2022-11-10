@@ -138,11 +138,14 @@ export default function FilterTrendingCard(props) {
           </Select>
         </FormControl>
       </CardContent>
-      <CardMedia
-        sx={{ height: 300 }}
-        image={img}
-        title="Filter"
-      />
+      {window.screen.availWidth > 600 ? (
+        <CardMedia
+          sx={{ height: 300 }}
+          image={img}
+          title="Filter"
+        />
+      ): (null) }
+      {window.screen.availWidth > 600 ? (
       <CardContent>
         <Typography variant="h5" component="h1">
           <SearchIcon fontSize="large" />
@@ -150,6 +153,7 @@ export default function FilterTrendingCard(props) {
           <br />
         </Typography>
       </CardContent>
+      ): (null) }
     </Card>
   );
 }

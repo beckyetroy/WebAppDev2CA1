@@ -10,14 +10,14 @@ const TemplatePersonPage = ({ person, children }) => {
     <>
       <PersonHeader person={person} />
 
-      <Grid container spacing={5} sx={{ padding: "15px" }}>
-        <Grid item xs={4}>
+      <Grid container spacing={5} sx={{ padding: "2%" }}>
+        <Grid item xs={12} sm={4}>
           <div sx={{
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "space-around",
           }}>
-          <img alt={person.name} style={{maxWidth:"250px", border: "solid 10px #3399ff"}}src={ person.profile_path
+          <img alt={person.name} style={{maxWidth:"100%", border: "solid medium #3399ff"}}src={ person.profile_path
                 ? `https://image.tmdb.org/t/p/w500/${person.profile_path}`
                 : person.gender === 1 ? femaleImg 
                 : maleImg
@@ -26,7 +26,7 @@ const TemplatePersonPage = ({ person, children }) => {
           </div>
         </Grid>
 
-        <Grid item xs={8}>
+        <Grid item xs={12} sm={8}>
           {children}
         </Grid>
       </Grid>

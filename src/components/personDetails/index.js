@@ -30,10 +30,11 @@ const PersonDetails = ({ person }) => {
 
   return (
     <>
-      <Typography variant="h5" component="h3"  style={{textDecoration: 'underline', paddingBottom: '1em'}}>
+      <Typography variant="h5" component="h3"  style={{textDecoration: 'underline', 
+        textAlign: 'center', paddingBottom: '1em'}}>
       {person.biography ?
           'Biography'
-        : `No Biography found for ${person.name}` }
+        : `Biography for ${person.name} unavailable` }
       </Typography>
 
       <Typography variant="h7" component="p" style={{paddingBottom: '1em', textAlign: 'justify'}}>

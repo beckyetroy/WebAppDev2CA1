@@ -10,7 +10,7 @@
     display: inline-block;
     padding-left: 0;
     list-style: none;
-    border: 0.9px solid #d24dff;
+    border: thin solid #d24dff;
     border-radius: 10%;
     padding-left: 2%;
     padding-right: 2%;
@@ -27,7 +27,7 @@
 
 .pagination > li.pagination__link--disabled {
     display: inline-block;
-    border: 0.9px solid #a6a6a6;
+    border: thin solid #a6a6a6;
 }
 
 .pagination > li.pagination__link--disabled > a {

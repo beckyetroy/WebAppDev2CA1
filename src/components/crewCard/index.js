@@ -12,9 +12,9 @@ import { Link } from "react-router-dom";
 export default function CrewCard({ crew }) {
 
   return (
-    <Card sx={{ maxWidth: 190, minHeight: 340}}>
+    <Card sx={{ maxWidth: '100%', minHeight: 350}}>
       <CardMedia
-        sx={{ height: 200 }}
+        sx={{ height: 210 }}
         image={
           crew.profile_path
             ? `https://image.tmdb.org/t/p/w500/${crew.profile_path}`
