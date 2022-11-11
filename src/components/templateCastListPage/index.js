@@ -40,7 +40,7 @@ function CastListPageTemplate({ casts, title, action }) {
         <Header title={title} />
       </Grid>
       <Grid item container spacing={1}>
-        <Grid key="find" item xs={12} sm={6} md={4} lg={3} xl={1.5}>
+        <Grid key="find" item xs={12} sm={5} md={3} lg={2} xl={1.5}>
           <FilterCard
             onUserInput={handleChange}
             actorFilter={nameFilter}
